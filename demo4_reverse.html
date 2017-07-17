@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>视差滚动</title>
+</head>
+
+<style>
+.container{
+	position: absolute;
+	width: 100%;
+	height: 3000px;
+}
+img{
+	position: absolute;
+}
+#ahri{
+	left: 550px;
+	
+}
+ 
+</style>
+<body>
+
+<section class="container">
+	<img id="sona" src="http://www.alloyteam.com/wp-content/uploads/2014/01/lol_sona.jpg">
+	<img id="ahri" src="http://www.alloyteam.com/wp-content/uploads/2014/01/lol_ahri.jpg">
+</section>
+
+<script>
+
+	var sona = document.getElementById('sona'),
+		ahri = document.getElementById('ahri');
+	var old_top1 = -1000,
+		old_top2 = 1000;
+
+	addEvent(window,'scroll',onScroll);
+	onScroll();
+	
+	function onScroll(e){
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		sona.style.top = old_top1+scrollTop*2+'px';
+		ahri.style.top = old_top2-scrollTop*0+'px';
+	}
+	onScroll();
+
+	function addEvent(eventTarget, eventType, eventHandler) {
+	    if (eventTarget.addEventListener) {
+	        eventTarget.addEventListener(eventType, eventHandler, false);
+	    } else {
+	        if (eventTarget.attachEvent) {
+	            eventType = "on" + eventType;
+	            eventTarget.attachEvent(eventType, eventHandler);
+	        } else {
+	            eventTarget["on" + eventType] = eventHandler;
+	        }
+	    }
+    }
+
+</script>
+
+</body>
+</html>
